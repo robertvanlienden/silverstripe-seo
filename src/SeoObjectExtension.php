@@ -11,7 +11,7 @@ use SilverStripe\View\SSViewer;
 use SilverStripe\View\ArrayData;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Control\Director;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\View\Requirements;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Core\Config\Config;
@@ -33,7 +33,7 @@ use SilverStripe\CMS\Model\RedirectorPage;
  * write good content for search engines, it uses the added var SEOPageSubject around
  * which the SEO score for the page is determined
  */
-class SeoObjectExtension extends DataExtension
+class SeoObjectExtension extends Extension
 {
     use Configurable;
 
