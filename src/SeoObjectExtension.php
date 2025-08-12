@@ -5,7 +5,9 @@ namespace Hubertusanton\SilverStripeSeo;
 use DOMDocument;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\Convert;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\SSViewer;
 use SilverStripe\View\ArrayData;
@@ -815,9 +817,11 @@ class SeoObjectExtension extends Extension
 
         if ($cache === null) {
             $session = [];
-            if (Controller::has_curr()) {
-                $session = Controller::curr()->getRequest()->getSession();
+
+            if ($request = Injector::inst()->get(HTTPRequest::class)) {
+                $session = $request->getSession();
             }
+
             $response = Director::test($this->owner->Link(), [], $session);
 
             if (!$response->isError()) {
