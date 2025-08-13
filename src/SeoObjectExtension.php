@@ -819,7 +819,11 @@ class SeoObjectExtension extends Extension
             $session = [];
 
             if ($request = Injector::inst()->get(HTTPRequest::class)) {
-                $session = $request->getSession();
+            if (Controller::has_curr()) {
+                $request = Controller::curr()->getRequest();
+                if ($request) {
+                    $session = $request->getSession();
+                }
             }
 
             $response = Director::test($this->owner->Link(), [], $session);
